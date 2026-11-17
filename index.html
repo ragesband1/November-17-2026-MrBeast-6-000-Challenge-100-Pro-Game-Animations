@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MrBeast 6,000 Challenge: 100 Pro Game Animations</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        mrblue: '#0055ff',
+                        mryellow: '#ffde00',
+                        mrpink: '#ff007f',
+                        mrdark: '#0a0b10',
+                        mrcard: '#121520',
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(255, 222, 0, 0.4)',
+                        'neon-blue': '0 0 20px rgba(0, 85, 255, 0.4)',
+                        'neon-pink': '0 0 20px rgba(255, 0, 127, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Pro Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a0b10;
+            color: #f3f4f6;
+        }
+        .orbitron-title {
+            font-family: 'Orbitron', sans-serif;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0b10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffde00;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #cca900;
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(255, 222, 0, 0.6), 0 0 20px rgba(255, 222, 0, 0.4);
+        }
+        .glow-blue {
+            text-shadow: 0 0 10px rgba(0, 85, 255, 0.6);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-mrdark selection:bg-mryellow selection:text-black">
+
+    <!-- Top Navigation / Header -->
+    <header class="sticky top-0 z-40 bg-mrdark/90 backdrop-blur-md border-b border-gray-800 px-4 lg:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gradient-to-tr from-mryellow to-amber-500 rounded-xl flex items-center justify-center text-black font-black text-2xl shadow-neon orbitron-title">
+                    6K
+                </div>
+                <div>
+                    <h1 class="orbitron-title text-xl md:text-2xl font-black tracking-wider text-white">
+                        MRBEAST <span class="text-mryellow">6,000</span> CHALLENGE
+                    </h1>
+                    <p class="text-xs text-gray-400">Professional 100 Games Animation Master Hub (50 2D / 50 3D)</p>
+                </div>
+            </div>
+
+            <!-- Global Progress Bar -->
+            <div class="flex items-center space-x-4 w-full md:w-auto bg-gray-900/80 px-4 py-2.5 rounded-2xl border border-gray-800">
+                <div class="text-right">
+                    <div class="text-xs font-semibold text-gray-400">Mastery Progress</div>
+                    <div class="text-sm font-bold text-mryellow"><span id="completed-count">0</span> / 100 Games</div>
+                </div>
+                <div class="w-32 bg-gray-800 h-3 rounded-full overflow-hidden">
+                    <div id="progress-bar-fill" class="bg-gradient-to-r from-mryellow to-amber-500 h-full w-0 transition-all duration-500"></div>
+                </div>
+                <button onclick="triggerGlobalCelebration()" class="bg-mryellow hover:bg-amber-400 text-black px-3 py-1.5 rounded-xl font-bold text-xs transition shadow-neon flex items-center gap-1">
+                    <i class="fa-solid fa-trophy"></i> Celebrate
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 lg:px-8 py-8">
+        
+        <!-- Hero Banner -->
+        <section class="relative rounded-3xl bg-gradient-to-r from-blue-950 via-gray-900 to-indigo-950 border border-gray-800 p-6 md:p-10 mb-8 overflow-hidden shadow-2xl">
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-mryellow/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-10 -top-10 w-64 h-64 bg-mrblue/20 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-2xl">
+                <span class="inline-block bg-mryellow text-black text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest mb-3 shadow-neon">
+                    Official 6,000 Celebration Edition
+                </span>
+                <h2 class="orbitron-title text-3xl md:text-5xl font-black text-white mb-4 leading-tight">
+                    100 PRO GAME ANIMATIONS <span class="text-mryellow">CATALOG</span>
+                </h2>
+                <p class="text-gray-300 text-sm md:text-base mb-6 leading-relaxed">
+                    Welcome to the ultimate MrBeast 6,000 Challenge celebration archive! Explore 50 handcrafted 2D sprite/vector game animations and 50 immersive 3D rigged game mechanics. Click any game card to inspect technical rigs, physics blueprints, and challenge rules!
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <button onclick="filterCategory('all')" id="btn-all" class="cat-tab px-5 py-2.5 rounded-xl font-bold text-sm bg-mryellow text-black shadow-neon transition">
+                        All 100 Games
+                    </button>
+                    <button onclick="filterCategory('2d')" id="btn-2d" class="cat-tab px-5 py-2.5 rounded-xl font-bold text-sm bg-gray-800 text-gray-300 hover:bg-gray-700 transition">
+                        <i class="fa-solid fa-gamepad mr-1.5 text-mryellow"></i> 50 2D Games
+                    </button>
+                    <button onclick="filterCategory('3d')" id="btn-3d" class="cat-tab px-5 py-2.5 rounded-xl font-bold text-sm bg-gray-800 text-gray-300 hover:bg-gray-700 transition">
+                        <i class="fa-solid fa-cube mr-1.5 text-mrblue"></i> 50 3D Games
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Filter Controls -->
+        <div class="flex flex-col sm:flex-row gap-4 mb-8 justify-between items-center">
+            <div class="relative w-full sm:w-96">
+                <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input type="text" id="search-input" oninput="handleSearch()" placeholder="Search game by title, genre, engine..." class="w-full bg-gray-900 border border-gray-800 rounded-2xl pl-12 pr-4 py-3 text-sm text-white focus:outline-none focus:border-mryellow transition shadow-inner">
+            </div>
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+                <select id="sort-select" onchange="handleSort()" class="bg-gray-900 border border-gray-800 rounded-2xl px-4 py-3 text-sm text-gray-300 focus:outline-none focus:border-mryellow transition">
+                    <option value="number">Sort by: Game # (1-100)</option>
+                    <option value="name">Sort by: Alphabetical</option>
+                    <option value="completed">Sort by: Completed Status</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Grid of 100 Games -->
+        <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Dynamically populated via JavaScript -->
+        </div>
+
+    </main>
+
+    <!-- Detail Modal -->
+    <div id="game-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div id="modal-content" class="bg-gray-900 border border-gray-700 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 relative shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+            <button onclick="closeModal()" class="absolute top-6 right-6 w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="modal-body">
+                <!-- Modal info filled dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8 text-center text-gray-500 text-sm mt-12 bg-mrdark">
+        <p class="orbitron-title text-gray-400 font-bold mb-2">MRBEAST 6,000 CHALLENGE CELEBRATION HUB</p>
+        <p>Built with professional precision for 50 2D and 50 3D game animation modules. Let's make history!</p>
+    </footer>
+
+    <!-- Application Script -->
+    <script>
+        // Data Store for 100 Games (50 2D + 50 3D)
+        const gamesData = [];
+
+        // Generate 50 2D Games
+        const genres2D = ["Platformer", "Metroidvania", "Fighting", "Shoot 'Em Up", "Puzzle", "Roguelike", "Visual Novel", "Rhythm", "Tactics", "Tower Defense"];
+        const engines2D = ["Godot 4.2", "Unity (URP 2D)", "GameMaker Studio 2", "Spine 2D + Construct 3", "Defold"];
+        
+        for (let i = 1; i <= 50; i++) {
+            const genre = genres2D[(i - 1) % genres2D.length];
+            const engine = engines2D[(i - 1) % engines2D.length];
+            gamesData.push({
+                id: i,
+                category: '2d',
+                title: `2D Game #${i}: ${get2DTitle(i, genre)}`,
+                genre: genre,
+                engine: engine,
+                icon: get2DIcon(i),
+                badgeColor: 'text-mryellow bg-mryellow/10 border-mryellow/30',
+                description: `A high-performance 2D animation module featuring fluid skeletal rigging, custom sprite sheet interpolation, and precise frame-by-frame impact frames.`,
+                animationBreakdown: [
+                    "Skeletal bone hierarchy with inverse kinematics (IK)",
+                    "Custom particle burst systems on jump/land/attack",
+                    "Dynamic hurtbox and hitbox state machine synchronization",
+                    "Parallax background layer scrolling with speed curves"
+                ],
+                challengeRule: `MrBeast 6,000 Challenge Rule: Complete level ${i} without taking any damage while confetti explosions trigger every 10 seconds!`,
+                completed: false
+            });
+        }
+
+        // Generate 50 3D Games
+        const genres3D = ["Action RPG", "FPS Shooter", "Open World", "Survival Horror", "Racing Simulator", "Sandbox Physics", "VR Immersive", "Soulslike", "Strategy", "Sports Arcade"];
+        const engines3D = ["Unreal Engine 5.3", "Unity (HDRP)", "Godot 4.3 3D", "CryEngine", "Unreal Engine 5 Nanite"];
+
+        for (let i = 51; i <= 100; i++) {
+            const genre = genres3D[(i - 51) % genres3D.length];
+            const engine = engines3D[(i - 51) % engines3D.length];
+            gamesData.push({
+                id: i,
+                category: '3d',
+                title: `3D Game #${i}: ${get3DTitle(i, genre)}`,
+                genre: genre,
+                engine: engine,
+                icon: get3DIcon(i),
+                badgeColor: 'text-mrblue bg-mrblue/10 border-mrblue/30',
+                description: `An immersive 3D game animation suite utilizing advanced motion-capture blending, procedural ragdoll physics, and real-time lighting interaction.`,
+                animationBreakdown: [
+                    "Root motion locomotion state machine with blend trees",
+                    "Cloth simulation cape and armor physics reactions",
+                    "Facial blendshapes synchronized with audio lip-sync",
+                    "Cinematic camera shakes and FOV punch effects"
+                ],
+                challengeRule: `MrBeast 6,000 Challenge Rule: Speedrun boss arena ${i} in under 6,000 milliseconds to unlock the ultimate $10,000 golden trophy skin!`,
+                completed: false
+            });
+        }
+
+        // Helper naming functions
+        function get2DTitle(id, genre) {
+            const names = ["Neon Blade Runner", "Cyber Katana", "Chrono Pixel", "Stellar Knight", "Quantum Jumper", "Shadow Rogue", "Astral Mage", "Pixel Brawler", "Void Striker", "Hyper Dash"];
+            return `${names[(id - 1) % names.length]} (${genre})`;
+        }
+
+        function get3DTitle(id, genre) {
+            const names = ["Titan Vanguard", "Apex Odyssey", "Cyberpunk Syndicate", "Void Horizon", "Shattered Realm", "Hyper Drift X", "Infinite Sanctum", "Omega Protocol", "Starlight Core", "Titanium Strike"];
+            return `${names[(id - 51) % names.length]} (${genre})`;
+        }
+
+        function get2DIcon(id) {
+            const icons = ["fa-bolt", "fa-fire", "fa-shield-halved", "fa-ghost", "fa-wand-magic-sparkles", "fa-dragon", "fa-skull", "fa-feather", "fa-burst", "fa-gamepad"];
+            return icons[(id - 1) % icons.length];
+        }
+
+        function get3DIcon(id) {
+            const icons = ["fa-cube", "fa-robot", "fa-jet-fighter", "fa-earth-americas", "fa-biohazard", "fa-atom", "fa-vr-cardboard", "fa-meteor", "fa-satellite", "fa-helmet-safety"];
+            return icons[(id - 51) % icons.length];
+        }
+
+        // State Management
+        let currentFilter = 'all';
+        let currentSearch = '';
+        let currentSort = 'number';
+
+        // Load saved progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('mrbeast_100games_progress');
+            if (saved) {
+                try {
+                    const completedIds = JSON.parse(saved);
+                    gamesData.forEach(game => {
+                        if (completedIds.includes(game.id)) {
+                            game.completed = true;
+                        }
+                    });
+                } catch(e) {}
+            }
+            updateProgressUI();
+        }
+
+        function saveProgress() {
+            const completedIds = gamesData.filter(g => g.completed).map(g => g.id);
+            localStorage.setItem('mrbeast_100games_progress', JSON.stringify(completedIds));
+            updateProgressUI();
+        }
+
+        function updateProgressUI() {
+            const completedCount = gamesData.filter(g => g.completed).length;
+            document.getElementById('completed-count').textContent = completedCount;
+            const percent = (completedCount / 100) * 100;
+            document.getElementById('progress-bar-fill').style.width = `${percent}%`;
+        }
+
+        // Render Games Grid
+        function renderGames() {
+            const grid = document.getElementById('games-grid');
+            grid.innerHTML = '';
+
+            let filtered = gamesData.filter(game => {
+                if (currentFilter === '2d' && game.category !== '2d') return false;
+                if (currentFilter === '3d' && game.category !== '3d') return false;
+                if (currentSearch) {
+                    const query = currentSearch.toLowerCase();
+                    return game.title.toLowerCase().includes(query) ||
+                           game.genre.toLowerCase().includes(query) ||
+                           game.engine.toLowerCase().includes(query) ||
+                           game.id.toString() === query;
+                }
+                return true;
+            });
+
+            // Sorting
+            if (currentSort === 'number') {
+                filtered.sort((a, b) => a.id - b.id);
+            } else if (currentSort === 'name') {
+                filtered.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (currentSort === 'completed') {
+                filtered.sort((a, b) => (b.completed === a.completed) ? a.id - b.id : b.completed ? 1 : -1);
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-gray-500">
+                        <i class="fa-solid fa-triangle-exclamation text-4xl mb-3 text-mryellow"></i>
+                        <p class="text-lg font-bold text-white">No game concepts found matching your search.</p>
+                        <p class="text-xs mt-1">Try searching for another keyword or category!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(game => {
+                const card = document.createElement('div');
+                card.className = `group bg-gray-900/90 hover:bg-gray-800 border ${game.completed ? 'border-emerald-500/50 shadow-emerald-500/10' : 'border-gray-800 hover:border-gray-600'} rounded-3xl p-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 shadow-lg relative overflow-hidden cursor-pointer`;
+                card.onclick = () => openModal(game.id);
+
+                const glowColor = game.category === '2d' ? 'group-hover:shadow-neon' : 'group-hover:shadow-neon-blue';
+                card.classList.add(glowColor);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black border ${game.badgeColor}">
+                                <i class="fa-solid ${game.icon}"></i> #${game.id} (${game.category.toUpperCase()})
+                            </span>
+                            <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${game.completed ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/50' : 'bg-gray-800 text-gray-500'}">
+                                <i class="fa-solid ${game.completed ? 'fa-check' : 'fa-circle'}"></i>
+                            </span>
+                        </div>
+                        <h3 class="font-bold text-white text-base md:text-lg mb-2 group-hover:text-mryellow transition line-clamp-1">
+                            ${game.title}
+                        </h3>
+                        <p class="text-xs text-gray-400 mb-4 line-clamp-2">
+                            ${game.description}
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs">
+                        <span class="text-gray-400 font-semibold"><i class="fa-solid fa-microchip mr-1 text-mryellow"></i>${game.engine}</span>
+                        <span class="text-mryellow font-bold group-hover:translate-x-1 transition flex items-center gap-1">
+                            Inspect <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter / Search / Sort Handlers
+        function filterCategory(cat) {
+            currentFilter = cat;
+            document.querySelectorAll('.cat-tab').forEach(btn => {
+                btn.className = "cat-tab px-5 py-2.5 rounded-xl font-bold text-sm bg-gray-800 text-gray-300 hover:bg-gray-700 transition";
+            });
+            const activeBtn = document.getElementById(`btn-${cat}`);
+            if (activeBtn) {
+                activeBtn.className = "cat-tab px-5 py-2.5 rounded-xl font-bold text-sm bg-mryellow text-black shadow-neon transition";
+            }
+            renderGames();
+        }
+
+        function handleSearch() {
+            currentSearch = document.getElementById('search-input').value;
+            renderGames();
+        }
+
+        function handleSort() {
+            currentSort = document.getElementById('sort-select').value;
+            renderGames();
+        }
+
+        // Modal Functionality
+        function openModal(id) {
+            const game = gamesData.find(g => g.id === id);
+            if (!game) return;
+
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = `
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 rounded-full text-xs font-black border ${game.badgeColor}">
+                        <i class="fa-solid ${game.icon} mr-1"></i> Module #${game.id} — ${game.category.toUpperCase()} ANIMATION
+                    </span>
+                    <span class="text-xs bg-gray-800 text-gray-300 px-3 py-1 rounded-full font-bold">
+                        <i class="fa-solid fa-tag text-mryellow mr-1"></i> ${game.genre}
+                    </span>
+                </div>
+                <h2 class="orbitron-title text-2xl md:text-3xl font-black text-white mb-3">
+                    ${game.title}
+                </h2>
+                <p class="text-gray-300 text-sm md:text-base mb-6 leading-relaxed">
+                    ${game.description}
+                </p>
+
+                <!-- Engine & Specs Box -->
+                <div class="bg-gray-950/80 border border-gray-800 rounded-2xl p-4 mb-6">
+                    <div class="text-xs font-bold text-mryellow uppercase tracking-wider mb-2">
+                        <i class="fa-solid fa-gears mr-1"></i> Professional Game Engine & Tools
+                    </div>
+                    <div class="text-white font-bold text-sm">${game.engine}</div>
+                </div>
+
+                <!-- Animation Breakdown -->
+                <div class="mb-6">
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-list-check text-mryellow mr-2"></i> Animation Blueprint & Rigging Breakdown
+                    </h4>
+                    <ul class="space-y-2">
+                        ${game.animationBreakdown.map(item => `
+                            <li class="flex items-start gap-2.5 text-xs md:text-sm text-gray-300 bg-gray-800/40 border border-gray-800 p-3 rounded-xl">
+                                <i class="fa-solid fa-circle-check text-mryellow mt-0.5"></i>
+                                <span>${item}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+
+                <!-- MrBeast Challenge Rule -->
+                <div class="bg-gradient-to-r from-amber-950/40 via-yellow-950/20 to-gray-900 border border-mryellow/30 rounded-2xl p-4 mb-8">
+                    <h4 class="text-xs font-bold text-mryellow uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-trophy"></i> MrBeast 6,000 Celebration Challenge
+                    </h4>
+                    <p class="text-sm text-gray-200 font-semibold">
+                        ${game.challengeRule}
+                    </p>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="toggleComplete(${game.id})" class="flex-1 py-3 px-6 rounded-xl font-black text-sm transition flex items-center justify-center gap-2 ${game.completed ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg shadow-emerald-500/30' : 'bg-mryellow hover:bg-amber-400 text-black shadow-neon'}">
+                        <i class="fa-solid ${game.completed ? 'fa-check-circle' : 'fa-play'}"></i>
+                        ${game.completed ? 'Challenge Completed! (Click to Undo)' : 'Mark Challenge Completed'}
+                    </button>
+                    <button onclick="simulateLaunch(${game.id})" class="py-3 px-6 rounded-xl font-bold text-sm bg-gray-800 hover:bg-gray-700 text-white transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-rocket text-mryellow"></i> Simulate Play Preview
+                    </button>
+                </div>
+            `;
+
+            const modal = document.getElementById('game-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('game-modal');
+            const content = document.getElementById('modal-content');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function toggleComplete(id) {
+            const game = gamesData.find(g => g.id === id);
+            if (game) {
+                game.completed = !game.completed;
+                saveProgress();
+                renderGames();
+                openModal(id); // Refresh modal view
+                if (game.completed) {
+                    confetti({
+                        particleCount: 80,
+                        spread: 60,
+                        origin: { y: 0.6 }
+                    });
+                }
+            }
+        }
+
+        function simulateLaunch(id) {
+            const game = gamesData.find(g => g.id === id);
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.5 }
+            });
+            alert(`🚀 Successfully launched simulator preview for "${game.title}"! Enjoy the MrBeast 6,000 Challenge celebration mode!`);
+        }
+
+        function triggerGlobalCelebration() {
+            confetti({
+                particleCount: 250,
+                spread: 120,
+                origin: { y: 0.4 }
+            });
+        }
+
+        // Initialize on Load
+        window.onload = function() {
+            loadProgress();
+            renderGames();
+
+            // Close modal when clicking outside
+            document.getElementById('game-modal').onclick = function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            };
+        };
+    </script>
+</body>
+</html>
